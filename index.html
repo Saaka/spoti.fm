@@ -6,7 +6,7 @@
 		<link rel="stylesheet" href="css/bootstrap.css">
 		<link rel="stylesheet" href="css/font-awesome.css">
 	</head>
-<body>
+<body ngCloak>
 	<div class="navbar navbar-default navbar-static-top">
 		<div class="container">
 			<div class="navbar-header">
@@ -22,7 +22,15 @@
 		</div>	
 		<div class="row" ng-controller="MainCtrl">
 			<div class="col-md-12">
-                <h2>{{name}}</h2>
+                <h2>Top tracks</h2>
+                <div ng-show="loadingData">
+                    <h3>Loading data <i class="fa fa-refresh fa-spin"></i></h3>
+                </div>
+                <div ng-hide="loadingData">
+                    <div ng-repeat="track in trackList">
+                        <h3>{{$index + 1}}. {{track.artist.name}} - {{track.name}}</h3>
+                    </div>
+                </div>
 		    </div>
 		</div>			
 	</main>

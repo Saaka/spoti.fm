@@ -5,8 +5,9 @@
 		<meta charset="utf-8"/>
 		<link rel="stylesheet" href="css/bootstrap.css">
 		<link rel="stylesheet" href="css/font-awesome.css">
+        <script src="js/angular.js"></script>
 	</head>
-<body ngCloak>
+<body>
 	<div class="navbar navbar-default navbar-static-top">
 		<div class="container">
 			<div class="navbar-header">
@@ -21,7 +22,7 @@
 		    </div>
 		</div>	
 		<div class="row" ng-controller="MainCtrl">
-			<div class="col-md-12">
+			<div class="col-md-12" ngCloak>
                 <h2>Top tracks</h2>
                 <div ng-show="loadingData">
                     <h3>Loading data <i class="fa fa-refresh fa-spin"></i></h3>
@@ -46,7 +47,6 @@
     </div>
     <script src="js/jquery-2.1.4.js"></script>
     <script src="js/bootstrap.js"></script>
-    <script src="js/angular.js"></script>
     <script src="js/spolastify.js"></script>
 </body>
 </html>

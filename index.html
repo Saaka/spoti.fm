@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="pl" ng-app='spolastify'>
 	<head>
         <title>Spolastify</title>
 		<meta charset="utf-8"/>
@@ -19,7 +19,12 @@
 			<div class="col-md-12">
 		    	<h1 id="myh1">Spolastify <i class="glyphicon glyphicon-heart"></i></h1>
 		    </div>
-		</div>		
+		</div>	
+		<div class="row" ng-controller="MainCtrl">
+			<div class="col-md-12">
+                <h2>{{name}}</h2>
+		    </div>
+		</div>			
 	</main>
 	<div class="footer">
     	<div class="container">
@@ -27,6 +32,9 @@
 	       	<p>&copy; 2015 - Michał Sakwa</p>
 	   	</div>
     </div>
+    <script src="js/jquery-2.1.4.js"></script>
     <script src="js/bootstrap.js"></script>
+    <script src="js/angular.js"></script>
+    <script src="js/spolastify.js"></script>
 </body>
 </html>

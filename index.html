@@ -21,23 +21,39 @@
 		    	<h1 id="myh1">Spolastify <i class="glyphicon glyphicon-heart"></i></h1>
 		    </div>
 		</div>	
-		<div class="row" ng-controller="MainCtrl">
-			<div class="col-md-12" ngCloak>
-                <h2>Top tracks</h2>
-                <div ng-show="loadingData">
-                    <h3>Loading data <i class="fa fa-refresh fa-spin"></i></h3>
+        <div ng-controller="MainCtrl" ngCloak>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="userName">User name</label>
+                        <input type="text" class="form-control" id="userName" ng-model="userName">
+                    </div>
+                    <div>
+                        <button class="btn btn-success" ng-click="doLoad()">Load user data</button>
+                    </div>
                 </div>
-                <div ng-hide="loadingData">
-                    <table class="table table-striped table-hover">
-                        <tr ng-repeat="track in trackList">
-                            <td>
-                                {{$index + 1}}. {{track.artist.name}} - {{track.name}}  
-                            </td>
-                        </tr>
-                    </table>
+                <div class="col-md-12" ng-show="showData">
+                    <h2>Top tracks</h2>
+                    <div ng-show="loadingData">
+                        <h3>Loading data <i class="fa fa-refresh fa-spin"></i></h3>
+                    </div>
+                    <div ng-hide="loadingData">
+                        <table class="table table-striped table-hover">
+                            <tr ng-repeat="track in trackList">
+                                <td>
+                                    {{$index + 1}}. {{::track.artist.name}} - {{::track.name}}  
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
-		    </div>
-		</div>			
+            </div>	
+            <div class="row">	
+                <div ng-show="showError" class="alert alert-danger col-md-12" role="alert">
+                    <label>{{errorMsg}}</label>
+                </div>
+            </div>
+        </div>
 	</main>
 	<div class="footer">
     	<div class="container">

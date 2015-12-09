@@ -1,14 +1,36 @@
 var app = angular.module('spolastify', []);
 
 app.controller('MainCtrl',['$scope', '$http', function($scope, $http) {
+    
     $scope.name = 'spolastify';
     $scope.trackList = [];
     $scope.loadingData = true;
     $scope.apiKey= '6a82616e5f43a1ab1cf7cede2b547e8a';
-    $http.get('http://ws.audioscrobbler.com/2.0/?method=user.getTopTracks&format=json&user=saka2&api_key=6a82616e5f43a1ab1cf7cede2b547e8a&period=12month')
-        .success(function(data) {
-            $scope.trackList = data.toptracks.track;
-    }).finally(function() {
-      $scope.loadingData = false;  
-    });
+    $scope.userName = '';
+    $scope.showData = false;
+    $scope.errorMsg = '';
+    
+    $scope.doLoad = function() {
+        $scope.loadingData = true;
+        $scope.showData = true;
+        $scope.showError = false;
+        $scope.errorMsg = '';
+        $scope.trackList = [];
+        
+        $http.get('http://ws.audioscrobbler.com/2.0/?method=user.getTopTracks&format=json&user=' + $scope.userName + '&api_key=' + $scope.apiKey + '&period=12month')
+            .success(function(data) {
+                if(data.error) {
+                    $scope.showData = false;
+                    $scope.showError = true;
+                    $scope.errorMsg = data.message;
+                }else {
+                    $scope.trackList = data.toptracks.track;
+                }
+            }).error(function(data) {
+                var err = data;  
+            }).finally(function() {
+              $scope.loadingData = false;  
+            });
+    }
+    
 }]);

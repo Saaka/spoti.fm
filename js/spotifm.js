@@ -13,14 +13,14 @@ app.controller('MainCtrl',['$scope', 'toaster', '$http', function($scope, toaste
     $scope.doLoad = function() {
         toaster.clear();
         $scope.trackList = [];
-        if($scope.selectedPeriod == null) {
+        if($scope.selectedPeriod == null || $scope.selectedPeriod.value == null) {
                     toaster.error('Error', 'Select period');
             return;
         }
         
         $scope.loadingData = true;
         $scope.showData = true;
-        $http.get('http://ws.audioscrobbler.com/2.0/?method=user.getTopTracks&format=json&user=' + $scope.userName + '&api_key=' + $scope.apiKey + '&period=12month')
+        $http.get('http://ws.audioscrobbler.com/2.0/?method=user.getTopTracks&format=json&user=' + $scope.userName + '&api_key=' + $scope.apiKey + '&period=' + $scope.selectedPeriod.value)
             .success(function(data) {
                 if(data.error) {
                     $scope.showData = false;

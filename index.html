@@ -32,7 +32,7 @@
                     </div>	
                     <div class="form-group">
                         <label for='period-select'>Period</label>
-                        <div period-select selected-value='selectedPeriod' class="form-control" id='period-select' ng-model="selectedPeriod"></div>
+                        <div period-select class="form-control" id='period-select' ng-model="selectedPeriod"></div>
                     </div>
                     <div>
                         <button class="btn btn-success" ng-click="doLoad()">Load user data</button>
@@ -54,7 +54,6 @@
                     </div>
                 </div>
             </div>
-            {{selectedPeriod == null ? "NULL" : selectedPeriod}}
             <toaster-container></toaster-container>
         </div>
 	</main>

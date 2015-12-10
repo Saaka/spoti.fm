@@ -11,9 +11,6 @@ app.directive('periodSelect', function() {
                 name: 'Select period',
                 value: null,
             }, {
-                name: 'Overall',
-                value: 'overall'
-            }, {
                 name: 'Last 7 days',
                 value: '7day'
             }, {
@@ -28,8 +25,11 @@ app.directive('periodSelect', function() {
             }, {
                 name: 'Last year',
                 value: '12month'
+            }, {
+                name: 'Overall',
+                value: 'overall'
             } ];
-            scope.ngModel = scope.objectList[1].value;
+            scope.ngModel = scope.objectList[0];
         }
     };
 });

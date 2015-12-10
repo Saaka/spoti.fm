@@ -1,8 +1,8 @@
-var app = angular.module('spolastify', []);
+var app = angular.module('spotifm', []);
 
 app.controller('MainCtrl',['$scope', '$http', function($scope, $http) {
     
-    $scope.name = 'spolastify';
+    $scope.name = 'Spoti.fm';
     $scope.trackList = [];
     $scope.loadingData = true;
     $scope.apiKey= '6a82616e5f43a1ab1cf7cede2b547e8a';
@@ -34,3 +34,8 @@ app.controller('MainCtrl',['$scope', '$http', function($scope, $http) {
     }
     
 }]);
+
+app.directive('periodSelect', function() {
+
+    
+});

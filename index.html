@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="pl" ng-app='spolastify'>
+<html lang="pl" ng-app='spotifm'>
 	<head>
-        <title>Spolastify</title>
+        <title>Spoti.fm</title>
 		<meta charset="utf-8"/>
 		<link rel="stylesheet" href="css/bootstrap.css">
 		<link rel="stylesheet" href="css/font-awesome.css">
@@ -11,14 +11,14 @@
 	<div class="navbar navbar-default navbar-static-top">
 		<div class="container">
 			<div class="navbar-header">
-				<a href="index.html" class="navbar-brand">Spolastify</a>
+				<a href="index.html" class="navbar-brand">Spoti.fm</a>
 			</div>
 		</div>
 	</div>
 	<main class="container">
 		<div class="row">
 			<div class="col-md-12">
-		    	<h1 id="myh1">Spolastify <i class="glyphicon glyphicon-heart"></i></h1>
+		    	<h1 id="myh1">Spoti.fm <i class="glyphicon glyphicon-heart"></i></h1>
 		    </div>
 		</div>	
         <div ng-controller="MainCtrl" ng-Cloak>
@@ -26,7 +26,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="userName">User name</label>
-                        <input type="text" class="form-control" id="userName" ng-model="userName">
+                        <input type="text" class="form-control" id="userName" ng-model="userName" ng-keyup="$event.keyCode == 13 && doLoad()">
                     </div>
                     <div>
                         <button class="btn btn-success" ng-click="doLoad()">Load user data</button>

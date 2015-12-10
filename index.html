@@ -5,7 +5,9 @@
 		<meta charset="utf-8"/>
 		<link rel="stylesheet" href="css/bootstrap.css">
 		<link rel="stylesheet" href="css/font-awesome.css">
+        <link rel="stylesheet" href="css/toaster.css"> 
         <script src="js/angular.js"></script>
+        <script src="js/angular-animate.js"></script>
 	</head>
 <body>
 	<div class="navbar navbar-default navbar-static-top">
@@ -27,6 +29,10 @@
                     <div class="form-group">
                         <label for="userName">User name</label>
                         <input type="text" class="form-control" id="userName" ng-model="userName" ng-keyup="$event.keyCode == 13 && doLoad()">
+                    </div>	
+                    <div class="form-group">
+                        <label for='period-select'>Period</label>
+                        <div period-select selected-value='selectedPeriod' class="form-control" id='period-select' ng-model="selectedPeriod"></div>
                     </div>
                     <div>
                         <button class="btn btn-success" ng-click="doLoad()">Load user data</button>
@@ -47,12 +53,9 @@
                         </table>
                     </div>
                 </div>
-            </div>	
-            <div class="row">	
-                <div ng-show="showError" class="alert alert-danger col-md-12" role="alert">
-                    <label>{{errorMsg}}</label>
-                </div>
             </div>
+            {{selectedPeriod == null ? "NULL" : selectedPeriod}}
+            <toaster-container></toaster-container>
         </div>
 	</main>
 	<div class="footer">
@@ -61,8 +64,10 @@
 	       	<p>&copy; 2015 - Michał Sakwa</p>
 	   	</div>
     </div>
+    <script src="js/toaster.js"></script>
     <script src="js/jquery-2.1.4.js"></script>
     <script src="js/bootstrap.js"></script>
-    <script src="js/spolastify.js"></script>
+    <script src="js/spotifm.js"></script>
+    <script src="js/spotifm-directives.js"></script>
 </body>
 </html>

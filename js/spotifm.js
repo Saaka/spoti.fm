@@ -1,4 +1,7 @@
-var app = angular.module('spotifm', ['ngAnimate', 'toaster']);
+var app = angular.module('spotifm', ['ngAnimate', 'toaster', 'ngClipboard'])
+        .config(['ngClipProvider', function(ngClipProvider) {
+            ngClipProvider.setPath("utils/ZeroClipboard.swf");
+        }]);
 
 app.controller('MainCtrl',['$scope', 'toaster', '$http', function($scope, toaster, $http) {
     
@@ -42,6 +45,10 @@ app.controller('MainCtrl',['$scope', 'toaster', '$http', function($scope, toaste
         } else {
             return addr;    
         }
+    }
+    
+    $scope.copyTrackInfo = function(track) {
+        return track.name;
     }
     
 }]);

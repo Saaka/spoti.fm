@@ -18,7 +18,9 @@ gulp.task('move-js', function() {
 						'bower_components/angular-animate/angular-animate.js',
 						'bower_components/AngularJS-Toaster/toaster.js',
 						'bower_components/jquery/dist/jquery.js',
-						'bower_components/bootstrap/dist/js/bootstrap.js'])
+						'bower_components/bootstrap/dist/js/bootstrap.js',
+						'bower_components/ng-clip/src/ngClip.js',
+						'bower_components/zeroclipboard/dist/ZeroClipboard.js'])
 		.pipe(gulp.dest('js'));
 });
 
@@ -35,4 +37,9 @@ gulp.task('move-fonts', function() {
 		.pipe(gulp.dest('fonts'));
 });
 
-gulp.task('default', ['move-js', 'move-css', 'move-fonts'], function() {});
+gulp.task('move-swf', function() {
+	return gulp.src('bower_components/zeroclipboard/dist/ZeroClipboard.swf')
+		.pipe(gulp.dest('utils'));
+});
+
+gulp.task('default', ['move-js', 'move-css', 'move-fonts', 'move-swf'], function() {});

@@ -16,9 +16,9 @@ app.directive('periodSelect', function() {
             }, {
                 name: 'Last month',
                 value: '1month'
-            }, {
-                name: 'Last 3 months',
-                value: '3month'
+//            }, {
+//                name: 'Last 3 months',
+//                value: '3month'
             }, {
                 name: 'Last 6 months',
                 value: '6month'

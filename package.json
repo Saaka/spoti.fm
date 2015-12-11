@@ -1,0 +1,19 @@
+{
+  "name": "saaka.github.io",
+  "version": "0.0.1",
+  "description": "My website hosted on github",
+  "main": "index.html",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.5.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Saaka/saaka.github.io.git"
+  },
+  "author": "Michał Sakwa <saka1988@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/Saaka/saaka.github.io"
+}

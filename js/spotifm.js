@@ -4,14 +4,11 @@ var app = angular.module('spotifm', ['ngAnimate', 'toaster', 'ngClipboard'])
         }]);
 
 app.controller('MainCtrl',['$scope', 'toaster', '$http', function($scope, toaster, $http) {
-    
-    $scope.name = 'Spoti.fm';
     $scope.trackList = [];
     $scope.loadingData = true;
     $scope.apiKey= '6a82616e5f43a1ab1cf7cede2b547e8a';
     $scope.userName = '';
     $scope.showData = false;
-    //$scope.selectedPeriod = null;
     
     $scope.doLoad = function() {
         toaster.clear();
@@ -46,9 +43,5 @@ app.controller('MainCtrl',['$scope', 'toaster', '$http', function($scope, toaste
             return addr;    
         }
     }
-    
-    $scope.copyTrackInfo = function(track) {
-        return track.name;
-    }
-    
+        
 }]);

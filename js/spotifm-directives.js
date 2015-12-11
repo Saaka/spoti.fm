@@ -7,10 +7,12 @@ app.directive('periodSelect', function() {
         },
         replace: true,
         link: function (scope, elem, attrs) {
-            scope.objectList = [{
-                name: 'Select period',
-                value: null,
-            }, {
+            scope.objectList = [
+            //     {
+            //     name: 'Select period',
+            //     value: null,
+            // }, 
+            {
                 name: 'Last 7 days',
                 value: '7day'
             }, {

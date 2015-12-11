@@ -1,0 +1,26 @@
+{
+  "name": "saaka.github.io",
+  "homepage": "https://github.com/Saaka/saaka.github.io",
+  "authors": [
+    "Michał Sakwa <saka1988@gmail.com>"
+  ],
+  "description": "My website on github",
+  "main": "index.html",
+  "moduleType": [],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.6",
+    "angular": "~1.4.8",
+    "angular-animate": "~1.4.8",
+    "AngularJS-Toaster": "toaster#~0.4.181",
+    "font-awesome": "~4.5.0"
+  }
+}

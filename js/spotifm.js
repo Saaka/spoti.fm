@@ -36,4 +36,12 @@ app.controller('MainCtrl',['$scope', 'toaster', '$http', function($scope, toaste
             });
     }
     
+    $scope.getImg = function(addr) {
+        if(addr == null || addr == '') {
+            return '/img/fall_track.png'
+        } else {
+            return addr;    
+        }
+    }
+    
 }]);

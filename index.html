@@ -45,9 +45,20 @@
                     </div>
                     <div ng-hide="loadingData">
                         <table class="table table-striped table-hover">
+                            <tr>
+                                <td>No.</td>
+                                <td>Artist</td>
+                                <td>Track</td>
+                                <td></td>
+                            </tr>
                             <tr ng-repeat="track in trackList">
+                                <td>{{$index + 1}}</td>
+                                <td>{{::track.artist.name}}</td>
+                                <td>{{::track.name}}</td>
                                 <td>
-                                    {{$index + 1}}. {{::track.artist.name}} - {{::track.name}}  
+<!--                                    <object data="/img/fall_track.png" type="image/png">-->
+                                        <img ng-src="{{::getImg(track.image[0]['#text'])}}" err-src="/img/fall_track.png"/>
+<!--                                    </object>-->
                                 </td>
                             </tr>
                         </table>

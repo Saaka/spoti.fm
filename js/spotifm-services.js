@@ -8,7 +8,7 @@ app.service('lastfmAPI', ['$http', '$q', function ($http, $q) {
                 $http.get('http://ws.audioscrobbler.com/2.0/?method=user.getTopTracks&format=json&user=' + userName + '&api_key=' + apiKey + '&period=' + period)
                         .success(function (data) {
                                 if (data.error) {
-                                        reject(data.message);
+                                        defer.reject(data.message);
                                 } else {
                                         var resultList = [];
                                         var trackList = data.toptracks.track;

@@ -16,7 +16,7 @@ app.service('lastfmAPI', ['$http', '$q', function ($http, $q) {
                                                 var result = {};
                                                 result.trackName = el.name;
                                                 result.artistName = el.artist.name;
-                                                result.smallImage = el.image[0]['#text'];
+                                                result.smallImage = getSmallFallbackImage(el.image[0]['#text']);
                                                 result.rank = el['@attr'].rank;
                                                 resultList.push(result);
                                         });
@@ -28,4 +28,12 @@ app.service('lastfmAPI', ['$http', '$q', function ($http, $q) {
 
                 return defer.promise;
         };
+
+    var getSmallFallbackImage = function (addr) {
+        if (addr == null || addr == '') {
+            return '/img/fall_track.png'
+        } else {
+            return addr;
+        }
+    }
 }]);

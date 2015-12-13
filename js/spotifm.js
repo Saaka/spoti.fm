@@ -29,13 +29,4 @@ app.controller('MainCtrl', ['$scope', 'toaster', '$http', 'lastfmAPI', function 
                 $scope.loadingData = false;
             });
     }
-
-    $scope.getImg = function (addr) {
-        if (addr == null || addr == '') {
-            return '/img/fall_track.png'
-        } else {
-            return addr;
-        }
-    }
-
 }]);

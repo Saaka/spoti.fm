@@ -1,37 +1,37 @@
 <!DOCTYPE html>
 <html lang="pl" ng-app='spotifm'>
-	<head>
-        <title>Spoti.fm</title>
-		<meta charset="utf-8"/>
-		<link rel="stylesheet" href="css/bootstrap.css">
-		<link rel="stylesheet" href="css/font-awesome.css">
-        <link rel="stylesheet" href="css/toaster.css"> 
-        <script src="js/angular.js"></script>
-	</head>
+<head>
+    <title>Spoti.fm</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="css/toaster.css">
+    <script src="js/angular.js"></script>
+</head>
 <body>
-	<div class="navbar navbar-default navbar-static-top">
-		<div class="container">
-			<div class="navbar-header">
-				<a href="index.html" class="navbar-brand">Spoti.fm</a>
-			</div>
-		</div>
-	</div>
-	<main class="container">
-		<div class="row">
-			<div class="col-md-12">
-		    	<h1 id="myh1">Spoti.fm <i class="fa fa-headphones"></i></h1>
-		    </div>
-		</div>	
+    <div class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a href="index.html" class="navbar-brand">Spoti.fm</a>
+            </div>
+        </div>
+    </div>
+    <main class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 id="myh1">Spoti.fm <i class="fa fa-headphones"></i></h1>
+            </div>
+        </div>
         <div ng-controller="MainCtrl" ng-Cloak>
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="userName">User name</label>
                         <input type="text" class="form-control" id="userName" ng-model="userName" ng-keyup="$event.keyCode == 13 && doLoad()" autofocus>
-                    </div>	
+                    </div>
                     <div class="form-group">
                         <label for='period-select'>Period</label>
-                        <div period-select class="form-control" id='period-select' ng-model="selectedPeriod"></div>
+                        <div period-select-lastfm class="form-control" id='period-select' ng-model="selectedPeriod"></div>
                     </div>
                     <div>
                         <button class="btn btn-success" ng-click="doLoad()">Load user data</button>
@@ -53,12 +53,10 @@
                             <tr ng-repeat="track in trackList">
                                 <td>{{$index + 1}}</td>
                                 <td>
-<!--                                    <object data="/img/fall_track.png" type="image/png">-->
-                                        <img ng-src="{{::getImg(track.image[0]['#text'])}}" err-src="/img/fall_track.png"/>
-<!--                                    </object>-->
+                                    <img ng-src="{{::track.smallImage}}" err-src="/img/fall_track.png" />
                                 </td>
-                                <td>{{::track.artist.name}}</td>
-                                <td>{{::track.name}}</td>
+                                <td>{{::track.artistName}}</td>
+                                <td>{{::track.trackName}}</td>
                             </tr>
                         </table>
                     </div>
@@ -66,12 +64,12 @@
             </div>
             <toaster-container></toaster-container>
         </div>
-	</main>
-	<div class="footer">
-    	<div class="container">
-    		<hr />
-	       	<p>&copy; 2015 - Michał Sakwa</p>
-	   	</div>
+    </main>
+    <div class="footer">
+        <div class="container">
+            <hr />
+            <p>&copy; 2015 - Michał Sakwa</p>
+        </div>
     </div>
     <script src="js/angular-animate.js"></script>
     <script src="js/toaster.js"></script>
@@ -79,6 +77,7 @@
     <script src="js/bootstrap.js"></script>
     <script src="js/spotifm.js"></script>
     <script src="js/spotifm-directives.js"></script>
+    <script src="js/spotifm-services.js"></script>
     <script src="js/ngClip.js"></script>
     <script src="js/ZeroClipboard.js"></script>
 </body>

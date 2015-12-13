@@ -1,4 +1,4 @@
-app.directive('periodSelect', function() {
+app.directive('periodSelectLastfm', function() {
     return {
         templateUrl: 'directives/period-select.html',
         restrict: 'A',

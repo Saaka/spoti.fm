@@ -1,11 +1,13 @@
 app.service('lastfmAPI', ['$http', '$q', function ($http, $q) {
 
         var apiKey = '6a82616e5f43a1ab1cf7cede2b547e8a';
+        var address = 'http://ws.audioscrobbler.com/2.0/?';
 	
         //Get to user tracks for given period of time
         this.getUserTopTracksForPeriod = function (userName, period) {
                 var defer = $q.defer();
-                $http.get('http://ws.audioscrobbler.com/2.0/?method=user.getTopTracks&format=json&user=' + userName + '&api_key=' + apiKey + '&period=' + period)
+                var method = 'user.getTopTracks';
+                $http.get(address + 'method=' + method + '&format=json&user=' + userName + '&api_key=' + apiKey + '&period=' + period)
                         .success(function (data) {
                                 if (data.error) {
                                         defer.reject(data.message);
@@ -36,4 +38,9 @@ app.service('lastfmAPI', ['$http', '$q', function ($http, $q) {
             return addr;
         }
     }
+}]);
+
+app.service('spotifyAPI', ['$http', '$q', function($http, $q) {
+    var clientId = '07c0d03f5ac14e6a92f4ec6c456aee61';
+    var address = 'https://api.spotify.com/v1/';    
 }]);

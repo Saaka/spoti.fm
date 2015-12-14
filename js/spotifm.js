@@ -4,14 +4,14 @@ var app = angular.module('spotifm', ['ngAnimate', 'toaster', 'ngClipboard'])
     }]);
 
 app.controller('MainCtrl', ['$scope', 'toaster', '$http', 'lastfmAPI', function ($scope, toaster, $http, lastfmAPI) {
-    $scope.trackList = [];
+    $scope.topTrackList = [];
     $scope.loadingData = true;
     $scope.userName = '';
     $scope.showData = false;
 
     $scope.doLoad = function () {
         toaster.clear();
-        $scope.trackList = [];
+        $scope.topTrackList = [];
         if ($scope.selectedPeriod == null || $scope.selectedPeriod.value == null) {
             toaster.error('Error', 'Select period');
             return;
@@ -21,9 +21,10 @@ app.controller('MainCtrl', ['$scope', 'toaster', '$http', 'lastfmAPI', function 
         $scope.showData = true;
         lastfmAPI.getUserTopTracksForPeriod($scope.userName, $scope.selectedPeriod.value)
             .then(function (data) {
-                $scope.trackList = data;
+                $scope.topTrackList = data;
                 $scope.loadingData = false;
             }).catch(function (error) {
+                $scope.topTrackList = [];
                 toaster.error('Error', error);
                 $scope.showData = false;
                 $scope.loadingData = false;

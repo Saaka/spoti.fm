@@ -1,0 +1,27 @@
+<div>
+	<div>
+		<label>Number of tracks: {{::topTrackList.length}}</label>
+		<div ng-show="showSpotifyButton">
+			<a class="btn btn-success" clip-copy="getTextToCopy()">Copy as Spotify playlist</a>
+		</div>
+		<br>
+	</div>
+	<div>
+		<table class="table table-striped table-hover">
+			<tr>
+				<th>No.</th>
+				<th class="col-md-1">Artist</th>
+				<th></th>
+				<th>Track</th>
+			</tr>
+			<tr ng-repeat="track in topTrackList">
+				<td>{{$index + 1}}</td>
+				<td>
+					<img ng-src="{{::track.smallImage}}" err-src="/img/fall_track.png" />
+				</td>
+				<td>{{::track.artistName}}</td>
+				<td>{{::track.trackName}}</td>
+			</tr>
+		</table>
+	</div>
+</div>

@@ -13,6 +13,7 @@
 				<th class="col-md-1">Artist</th>
 				<th></th>
 				<th>Track</th>
+				<th>Avaliable</th>
 			</tr>
 			<tr ng-repeat="track in topTrackList">
 				<td>{{$index + 1}}</td>
@@ -21,6 +22,10 @@
 				</td>
 				<td>{{::track.artistName}}</td>
 				<td>{{::track.trackTitle}}</td>
+				<td>
+					<i class="fa fa-check-circle-o fa-lg text-success" ng-show="track.isAvaliable"></i>
+					<i class="fa fa-times-circle-o fa-lg text-danger" ng-hide="track.isAvaliable"></i>
+				</td>
 			</tr>
 		</table>
 	</div>

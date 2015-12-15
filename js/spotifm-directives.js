@@ -1,16 +1,18 @@
-app.directive('topTrackListLastfm', function () {
+app.directive('topTrackListLastfm', function ($sce) {
     return {
         templateUrl: 'directives/top-track-list-lastfm.html',
         restrict: 'A',
         scope: {
             topTrackList: '=',
-            showSpotifyButton: '='
+            showSpotifyButton: '=',
+            songPlaying: '='
         },
         replace: true,
         link: function (scope, elem, atts) {
             if (scope.showSpotifyButton == undefined) {
                 scope.showSpotifyButton = true;
             }
+            scope.songPlaying = null;
 
             scope.getTextToCopy = function () {
                 var text = '';
@@ -21,6 +23,20 @@ app.directive('topTrackListLastfm', function () {
                 }
                 return text;
             }
+
+            scope.toggleSongPlaying = function (song) {
+                if (scope.songPlaying == null) {
+                    scope.songPlaying = song;
+                } else {
+                    scope.songPlaying = null;
+                }
+            }
+            
+            scope.trustSrc = function (song) {
+                if (song == null)
+                    return "";
+                return $sce.trustAsResourceUrl(song);
+            };
         }
     };
 });

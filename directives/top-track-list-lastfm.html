@@ -1,4 +1,5 @@
 <div>
+	<audio id="spotify-preview" autoplay hidden src="{{trustSrc(songPlaying)}}"></audio>
 	<div>
 		<label>Number of tracks: {{topTrackList.length}}</label>
 		<div ng-show="showSpotifyButton">
@@ -14,6 +15,7 @@
 				<th></th>
 				<th>Track</th>
 				<th>Avaliable</th>
+				<th>Preview</th>
 			</tr>
 			<tr ng-repeat="track in topTrackList">
 				<td>{{$index + 1}}</td>
@@ -23,8 +25,17 @@
 				<td>{{::track.artistName}}</td>
 				<td>{{::track.trackTitle}}</td>
 				<td>
-					<i class="fa fa-check-circle-o fa-lg text-success" ng-show="track.isAvaliable"></i>
-					<i class="fa fa-times-circle-o fa-lg text-danger" ng-hide="track.isAvaliable"></i>
+					<i class="fa fa-check-circle-o fa-2x text-success" ng-show="track.isAvaliable"></i>
+					<i class="fa fa-times-circle-o fa-2x text-danger" ng-hide="track.isAvaliable"></i>
+				</td>
+				<td>
+					<a ng-click="toggleSongPlaying(track.spotifyPreview)" ng-show="track.isAvaliable">
+						<i class="fa fa-play-circle-o fa-2x text-info" ng-hide="songPlaying === track.spotifyPreview"></i>
+						<i class="fa fa-pause-circle-o fa-2x text-warning" ng-show="songPlaying === track.spotifyPreview"></i>
+					</a>
+					<span ng-hide="track.isAvaliable">
+						<i class="fa fa-times-circle-o fa-2x text-danger"></i>
+					</span>
 				</td>
 			</tr>
 		</table>

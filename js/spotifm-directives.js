@@ -37,6 +37,10 @@ app.directive('topTrackListLastfm', function ($sce) {
                     return "";
                 return $sce.trustAsResourceUrl(song);
             };
+            
+            scope.isPreviewAvaliable = function (track) {
+                return track.isAvaliable && track.spotifyPreview != null;
+            };
         }
     };
 });

@@ -29,11 +29,11 @@
 					<i class="fa fa-times-circle-o fa-2x text-danger" ng-hide="track.isAvaliable"></i>
 				</td>
 				<td>
-					<a ng-click="toggleSongPlaying(track.spotifyPreview)" ng-show="track.isAvaliable">
+					<a ng-click="toggleSongPlaying(track.spotifyPreview)" ng-show="isPreviewAvaliable(track)">
 						<i class="fa fa-play-circle-o fa-2x text-info" ng-hide="songPlaying === track.spotifyPreview"></i>
 						<i class="fa fa-pause-circle-o fa-2x text-warning" ng-show="songPlaying === track.spotifyPreview"></i>
 					</a>
-					<span ng-hide="track.isAvaliable">
+					<span ng-hide="isPreviewAvaliable(track)">
 						<i class="fa fa-times-circle-o fa-2x text-danger"></i>
 					</span>
 				</td>

@@ -11,9 +11,15 @@ app.directive('topTrackListLastfm', function () {
             if (scope.showSpotifyButton == undefined) {
                 scope.showSpotifyButton = true;
             }
-            
-            scope.getTextToCopy = function() {
-                return 'Not yet ready';
+
+            scope.getTextToCopy = function () {
+                var text = '';
+                for (var index in scope.topTrackList) {
+                    if (scope.topTrackList[index].isAvaliable) {
+                        text += scope.topTrackList[index].spotifyUri + '\r\n';
+                    }
+                }
+                return text;
             }
         }
     };

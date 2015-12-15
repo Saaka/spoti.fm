@@ -16,7 +16,7 @@ app.service('lastfmAPI', ['$http', '$q', function ($http, $q) {
                                         var trackList = data.toptracks.track;
                                         trackList.map(function (el) {
                                                 var result = {};
-                                                result.trackName = el.name;
+                                                result.trackTitle = el.name;
                                                 result.artistName = el.artist.name;
                                                 result.smallImage = getSmallFallbackImage(el.image[0]['#text']);
                                                 result.rank = el['@attr'].rank;
@@ -42,5 +42,21 @@ app.service('lastfmAPI', ['$http', '$q', function ($http, $q) {
 
 app.service('spotifyAPI', ['$http', '$q', function($http, $q) {
     var clientId = '07c0d03f5ac14e6a92f4ec6c456aee61';
-    var address = 'https://api.spotify.com/v1/';    
+    var address = 'https://api.spotify.com/v1/';
+    var colon = '%3A';
+    var quote = '%22';
+    
+    this.getTrackSpotifyData = function(artistName, trackTitle) {
+            $http.get(address + 'search?q=artist%3A' + getArtistNameEncoded(artistName) + '%20track%3A' + getTrackTitleEncoded(trackTitle) + '%20type=track%20limit=1') 
+    }
+    
+    var getArtistNameEncoded = function(artistName)
+    {
+        return artistName;    
+    }
+    
+    var getTrackTitleEncoded = function(trackTitle)
+    {
+        return trackTitle;    
+    }
 }]);

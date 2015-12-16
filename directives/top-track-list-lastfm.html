@@ -3,7 +3,7 @@
 	<div>
 		<label>Number of tracks: {{topTrackList.length}}</label>
 		<div ng-show="showSpotifyButton">
-			<a class="btn btn-success" clip-copy="getTextToCopy()">Copy as Spotify playlist</a>
+			<button class="btn btn-success" clip-copy="getTextToCopy()">Copy as Spotify playlist</button>
 		</div>
 		<br>
 	</div>
@@ -29,12 +29,18 @@
 					<i class="fa fa-times-circle-o fa-2x text-danger" ng-hide="track.isAvaliable"></i>
 				</td>
 				<td>
-					<a ng-click="toggleSongPlaying(track.spotifyPreview)" ng-show="isPreviewAvaliable(track)">
-						<i class="fa fa-play-circle-o fa-2x text-info" ng-hide="songPlaying === track.spotifyPreview"></i>
-						<i class="fa fa-pause-circle-o fa-2x text-warning" ng-show="songPlaying === track.spotifyPreview"></i>
-					</a>
+					<span ng-show="isPreviewAvaliable(track)">
+						<button class="btn btn-info btn-sm btn-play-preview" ng-click="toggleSongPlaying(track.spotifyPreview)"  ng-hide="songPlaying === track.spotifyPreview">
+							Play <i class="fa fa-play-circle-o fa-fw"></i>
+						</button>
+						<button class="btn btn-warning btn-sm btn-play-preview" ng-click="toggleSongPlaying(track.spotifyPreview)"  ng-show="songPlaying === track.spotifyPreview">
+							Stop <i class="fa fa-pause-circle-o fa-fw"></i>
+						</button>
+					</span>
 					<span ng-hide="isPreviewAvaliable(track)">
-						<i class="fa fa-times-circle-o fa-2x text-danger"></i>
+						<button class="btn btn-danger btn-sm btn-play-preview disabled">
+							Play <i class="fa fa-play-circle-o fa-fw"></i>
+						</button>
 					</span>
 				</td>
 			</tr>

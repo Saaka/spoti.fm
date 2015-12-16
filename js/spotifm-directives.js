@@ -23,6 +23,10 @@ app.directive('topTrackListLastfm', function ($sce) {
                 }
                 return text;
             }
+            
+            scope.getTrackInfoToCopy = function(track) {
+                return track.spotifyUri;
+            }
 
             scope.toggleSongPlaying = function (song) {
                 if (scope.songPlaying == null) {

@@ -1,3 +1,8 @@
 .btn-play-preview {
-	width: 64px;
+	width: 52px;
+	padding-left: 5px;
+}
+.btn-copy-to-spotify-row {
+	width: 104px;
+	padding-left: 4px;
 }

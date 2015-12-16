@@ -56,14 +56,50 @@ app.service('spotifyAPI', ['$http', '$q', function ($http, $q) {
 
         this.getTrackSpotifyData = function (artistName, trackTitle) {
                 var defer = $q.defer();
-                $http.get(address +
-                        'search?q=artist%3A%22' + getArtistNameEncoded(artistName) +
-                        '%22%20track%3A%22' + getTrackTitleEncoded(trackTitle) +
-                        '%22&type=track&limit=1')
+                getTrackSpotifyDataWithLimit(artistName, trackTitle, 1)
+                        .then(function (data) {
+                                defer.resolve(data);
+                        })
+                        .catch(function (error) {
+                                if (error == 'Not found') {
+                                        getTrackSpotifyDataWithLimit(artistName, trackTitle, 20)
+                                                .then(function (data) {
+                                                        defer.resolve(data);
+                                                })
+                                                .catch(function (errStatus) {
+                                                        defer.reject(errStatus);
+                                                });
+                                }
+                                else {
+                                        defer.reject(error);
+                                }
+                        });
+
+                return defer.promise;
+        }
+
+        function getTrackSpotifyDataWithLimit(artistName, trackTitle, limit) {
+                var defer = $q.defer();
+                getTrackSpotifyDataRequestWithLimit(artistName, trackTitle, limit)
                         .success(function (data) {
                                 var track = {};
                                 if (data.tracks && data.tracks.items.length) {
-                                        var trackInfo = data.tracks.items[0];
+                                        var bestMatchIndex = 0;
+                                        if (limit > 1) {
+                                                for (var index in data.tracks.items) {
+                                                        var temp = data.tracks.items[index];
+                                                        if (temp.name == trackTitle) {
+                                                                bestMatchIndex = index;
+                                                                break;
+                                                        }
+                                                }
+                                        }
+                                        var trackInfo = data.tracks.items[bestMatchIndex];
+                                        if (limit == 1) {
+                                                if (trackInfo.name != trackTitle) {
+                                                        defer.reject('Not found');
+                                                }
+                                        }
                                         track.spotifyUri = trackInfo.uri;
                                         track.spotifyPreview = trackInfo.preview_url;
                                         track.isAvaliable = true;
@@ -77,6 +113,13 @@ app.service('spotifyAPI', ['$http', '$q', function ($http, $q) {
                         });
 
                 return defer.promise;
+        }
+
+        function getTrackSpotifyDataRequestWithLimit(artistName, trackTitle, limit) {
+                return $http.get(address +
+                        'search?q=artist%3A%22' + getArtistNameEncoded(artistName) +
+                        '%22%20track%3A%22' + getTrackTitleEncoded(trackTitle) +
+                        '%22&type=track&limit=' + limit)
         }
 
         var getArtistNameEncoded = function (artistName) {

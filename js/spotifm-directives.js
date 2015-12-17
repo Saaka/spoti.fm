@@ -4,14 +4,10 @@ app.directive('topTrackListLastfm', function ($sce) {
         restrict: 'A',
         scope: {
             topTrackList: '=',
-            showSpotifyButton: '=',
             songPlaying: '='
         },
         replace: true,
         link: function (scope, elem, atts) {
-            if (scope.showSpotifyButton == undefined) {
-                scope.showSpotifyButton = true;
-            }
             scope.songPlaying = null;
 
             scope.getTextToCopy = function () {

@@ -2,7 +2,7 @@
 	<audio id="spotify-preview" autoplay hidden src="{{trustSrc(songPlaying)}}"></audio>
 	<div>
 		<label>Number of tracks: {{topTrackList.length}}</label>
-		<div ng-show="showSpotifyButton">
+		<div>
 			<button class="btn btn-success" clip-copy="getTextToCopy()">Copy as Spotify playlist</button>
 		</div>
 		<br>

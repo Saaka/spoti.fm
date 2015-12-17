@@ -8,7 +8,7 @@
 		<br>
 	</div>
 	<div>
-		<table class="table table-striped table-hover">
+		<table class="table table-striped">
 			<tr>
 				<th>No.</th>
 				<th class="col-md-1">Artist</th>
@@ -17,7 +17,7 @@
 				<th>Avaliable</th>
 				<th>Preview</th>
 			</tr>
-			<tr ng-repeat="track in topTrackList">
+			<tr ng-repeat-start="track in topTrackList">
 				<td>{{$index + 1}}</td>
 				<td>
 					<img ng-src="{{::track.smallImage}}" err-src="/img/fall_track.png" />
@@ -48,6 +48,12 @@
 					</span>
 				</td>
 			</tr>
+			<!--<tr hidden ng-if="track.isExpanded"><td></td></tr>
+			<tr ng-if="track.isExpanded" ng-repeat-end="">
+				<td colspan="6">
+					<div>{{track.spotifyUri}}</div>
+				</td>
+			</tr>-->
 		</table>
 	</div>
 </div>

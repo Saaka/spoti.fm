@@ -9,7 +9,6 @@ app.directive('topTrackListLastfm', function ($sce) {
         replace: true,
         link: function (scope, elem, atts) {
             scope.songPlaying = null;
-            scope.expandedTrack = null;
 
             scope.getTextToCopy = function () {
                 var text = '';
@@ -19,19 +18,6 @@ app.directive('topTrackListLastfm', function ($sce) {
                     }
                 }
                 return text;
-            }
-
-            scope.toggleExpandTrack = function (track) {
-                if (scope.expandedTrack === track) {
-                    track.isExpanded = false;
-                    scope.expandedTrack = null;
-                } else {
-                    if (scope.expandedTrack != null) {
-                        scope.expandedTrack.isExpanded = false;
-                    }
-                    track.isExpanded = true;
-                    scope.expandedTrack = track;
-                }
             }
 
             scope.getTrackInfoToCopy = function (track) {

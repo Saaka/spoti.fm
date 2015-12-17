@@ -1,7 +1,8 @@
 <div>
 	<audio id="spotify-preview" autoplay hidden src="{{trustSrc(songPlaying)}}"></audio>
 	<div>
-		<label>Number of tracks: {{topTrackList.length}}</label>
+		<p><label>Number of tracks: {{topTrackList.length}}</label></p>
+		<p><label>Number of avaliable tracks: {{ (topTrackList | filter : {isAvaliable: 'true'}).length }}</label></p>
 		<div>
 			<button class="btn btn-success" clip-copy="getTextToCopy()">Copy as Spotify playlist</button>
 		</div>
@@ -17,7 +18,7 @@
 				<th>Avaliable</th>
 				<th>Preview</th>
 			</tr>
-			<tr ng-repeat-start="track in topTrackList">
+			<tr ng-repeat="track in topTrackList">
 				<td>{{$index + 1}}</td>
 				<td>
 					<img ng-src="{{::track.smallImage}}" err-src="/img/fall_track.png" />
@@ -48,12 +49,6 @@
 					</span>
 				</td>
 			</tr>
-			<!--<tr hidden ng-if="track.isExpanded"><td></td></tr>
-			<tr ng-if="track.isExpanded" ng-repeat-end="">
-				<td colspan="6">
-					<div>{{track.spotifyUri}}</div>
-				</td>
-			</tr>-->
 		</table>
 	</div>
 </div>

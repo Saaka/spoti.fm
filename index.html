@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pl" ng-app='spotifm'>
+
 <head>
     <title>Spoti.fm</title>
     <meta charset="utf-8" />
@@ -9,6 +10,7 @@
     <link rel="stylesheet" href="css/spotifm.css">
     <script src="js/angular.js"></script>
 </head>
+
 <body>
     <div class="navbar navbar-default navbar-static-top">
         <div class="container">
@@ -25,7 +27,14 @@
         </div>
         <div ng-controller="MainCtrl" ng-Cloak>
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-5 col-md-push-7">
+                    <h3>How this works?</h3>
+                    <p>1. Type in desired <em>user name</em> and select <em>period</em> from avaliable options</p>
+                    <p>2. Click <span class="text-primary">'Load user data'</span> button and wait a little bit</p>
+                    <p>3. Click <span class="text-success">'Copy as Spotify playlist'</span> and paste the result to new Spotify playlist</p>
+                    <p>4. <strong>Enjoy</strong> your music!</p>
+                </div>
+                <div class="col-md-7 col-md-pull-5">
                     <div class="form-group">
                         <label for="userName">User name</label>
                         <input type="text" class="form-control" id="userName" ng-model="userName" ng-keyup="$event.keyCode == 13 && doLoad()" autofocus>
@@ -38,6 +47,8 @@
                         <button class="btn btn-primary" ng-click="doLoad()">Load user data</button>
                     </div>
                 </div>
+            </div>
+            <div class="row">
                 <div class="col-md-12" ng-show="showData" id="topTracks">
                     <h2>Top tracks</h2>
                     <div ng-show="loadingData">
@@ -67,4 +78,5 @@
     <script src="js/ngClip.js"></script>
     <script src="js/ZeroClipboard.js"></script>
 </body>
+
 </html>

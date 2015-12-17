@@ -58,21 +58,35 @@ app.service('spotifyAPI', ['$http', '$q', function ($http, $q) {
                 var defer = $q.defer();
                 getTrackSpotifyDataWithLimit(artistName, trackTitle, 1)
                         .then(function (data) {
-                                defer.resolve(data);
+                                if (data.isAvaliable) {
+                                        if (data.trackTitle == trackTitle) {
+                                                defer.resolve(data);
+                                        } else {
+                                                getTrackSpotifyDataWithLimit(artistName, trackTitle, 20)
+                                                        .then(function (data) {
+                                                                defer.resolve(data);
+                                                        })
+                                                        .catch(function (errStatus) {
+                                                                defer.reject(errStatus);
+                                                        });
+                                        }
+                                } else {
+                                        var trackTitleSimple = removeTrackTitleNoise(trackTitle);
+                                        if (trackTitleSimple == trackTitle) {
+                                                defer.resolve(data);
+                                        } else {
+                                                getTrackSpotifyDataWithLimit(artistName, trackTitleSimple, 20)
+                                                        .then(function (data) {
+                                                                defer.resolve(data);
+                                                        })
+                                                        .catch(function (errStatus) {
+                                                                defer.reject(errStatus);
+                                                        });
+                                        }
+                                }
                         })
                         .catch(function (error) {
-                                if (error == 'Not found') {
-                                        getTrackSpotifyDataWithLimit(artistName, trackTitle, 20)
-                                                .then(function (data) {
-                                                        defer.resolve(data);
-                                                })
-                                                .catch(function (errStatus) {
-                                                        defer.reject(errStatus);
-                                                });
-                                }
-                                else {
-                                        defer.reject(error);
-                                }
+                                defer.reject(error);
                         });
 
                 return defer.promise;
@@ -95,11 +109,7 @@ app.service('spotifyAPI', ['$http', '$q', function ($http, $q) {
                                                 }
                                         }
                                         var trackInfo = data.tracks.items[bestMatchIndex];
-                                        if (limit == 1) {
-                                                if (trackInfo.name != trackTitle) {
-                                                        defer.reject('Not found');
-                                                }
-                                        }
+                                        track.trackTitle = track.name;
                                         track.spotifyUri = trackInfo.uri;
                                         track.spotifyPreview = trackInfo.preview_url;
                                         track.isAvaliable = true;
@@ -113,6 +123,18 @@ app.service('spotifyAPI', ['$http', '$q', function ($http, $q) {
                         });
 
                 return defer.promise;
+        }
+
+        function removeTrackTitleNoise(trackTitle) {
+                if (trackTitle.indexOf('(') > -1) {
+                        return trackTitle.split('(')[0].trim();
+                } else if (trackTitle.indexOf('[') > -1) {
+                        return trackTitle.split('[')[0].trim();
+                } else if (trackTitle.indexOf('-') > -1) {
+                        return trackTitle.split('-')[0].trim();
+                } else {
+                        return trackTitle;
+                }
         }
 
         function getTrackSpotifyDataRequestWithLimit(artistName, trackTitle, limit) {

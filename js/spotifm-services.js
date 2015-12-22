@@ -43,7 +43,7 @@ app.service('lastfmAPI', ['$http', '$q', 'spotifyAPI', function ($http, $q, spot
 
         var getSmallFallbackImage = function (addr) {
                 if (addr == null || addr == '') {
-                        return '/img/fall_track.png'
+                        return './img/fall_track.png'
                 } else {
                         return addr;
                 }

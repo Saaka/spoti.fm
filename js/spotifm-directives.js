@@ -25,7 +25,8 @@ app.directive('topTrackListLastfm', function ($sce) {
             }
 
             scope.toggleSongPlaying = function (song) {
-                if (scope.songPlaying == null) {
+                if (scope.songPlaying == null ||
+                    scope.songPlaying !== song) {
                     scope.songPlaying = song;
                 } else {
                     scope.songPlaying = null;

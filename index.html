@@ -46,7 +46,7 @@
                 <div class="col-md-7 col-md-pull-5">
                     <div class="form-group">
                         <label for="userName">User name</label>
-                        <input type="text" class="form-control" id="userName" ng-model="userName" ng-keyup="$event.keyCode == 13 && doLoad()" autofocus>
+                        <input type="text" class="form-control" id="userName" ng-model="userName" ng-keyup="$event.keyCode == 13 && doLoad()" ng-maxlength="30" autofocus>
                     </div>
                     <div class="form-group">
                         <label for='period-select'>Period</label>

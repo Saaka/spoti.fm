@@ -3,7 +3,7 @@ var app = angular.module('spotifm', ['ngAnimate', 'toaster', 'ngClipboard'])
         ngClipProvider.setPath("utils/ZeroClipboard.swf");
     }]);
 
-app.controller('MainCtrl', ['$scope', 'toaster', '$http', 'lastfmAPI', function ($scope, toaster, $http, lastfmAPI) {
+app.controller('MainCtrl', ['$scope', 'toaster', '$http', 'lastfmAPI', 'mongger', function ($scope, toaster, $http, lastfmAPI, mongger) {
     $scope.topTrackList = [];
     $scope.loadingData = true;
     $scope.userName = '';
@@ -19,6 +19,7 @@ app.controller('MainCtrl', ['$scope', 'toaster', '$http', 'lastfmAPI', function 
 
         $scope.loadingData = true;
         $scope.showData = true;
+        mongger.saveRequestToMongger($scope.userName, $scope.selectedPeriod.value, 'unknown');
         lastfmAPI.getUserTopTracksForPeriod($scope.userName, $scope.selectedPeriod.value)
             .then(function (data) {
                 $scope.topTrackList = data;

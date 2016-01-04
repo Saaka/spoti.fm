@@ -43,19 +43,49 @@ app.service('lastfmAPI', ['$http', '$q', 'spotifyAPI', function ($http, $q, spot
 
     var getSmallFallbackImage = function (addr) {
         if (addr == null || addr == '') {
-            return './img/fall_track.png'
+            return './img/fall_track.png';
         } else {
             return addr;
         }
     };
 }]);
 
+app.service('freeGeoIp', ['$http', '$q', function ($http, $q) {
+    var address = 'http://freegeoip.net/json/';
+
+    this.getGeoInfo = function () {
+        var defer = $q.defer();
+
+        getResult().
+        then(function (data) {
+            defer.resolve(getMappedObject(data.data));
+        }).catch(function (err) {
+            defer.reject(err);
+        });
+        return defer.promise;
+    };
+
+    var getResult = function () {
+        return $http.get(address);
+    };
+
+    var getMappedObject = function (data) {
+        return {
+            "ip": data.ip,
+            "country": data.country_name,
+            "region": data.region_name,
+            "city": data.city,
+            "timezone": data.time_zone
+        };
+    };
+}]);
+
 app.service('mongger', ['$http', '$q', function ($http, $q) {
     var address = 'http://mongger-saaka.rhcloud.com';
 
-    this.saveRequestToMongger = function (user, period, ip) {
+    this.saveRequestToMongger = function (user, period, geoData) {
         var defer = $q.defer();
-        postSpotifm(user, period, ip)
+        postSpotifm(user, period, geoData)
             .then(function (data) {
                 defer.resolve(data);
             }).catch(function (err) {
@@ -64,13 +94,17 @@ app.service('mongger', ['$http', '$q', function ($http, $q) {
         return defer.promise;
     };
 
-    var postSpotifm = function (user, period, ip) {
+    var postSpotifm = function (user, period, geoData) {
         return $http.post(address + '/spotifm', {
             "user": user,
             "period": period,
-            "ip": ip
+            "ip": geoData.ip,
+            "country": geoData.country,
+            "region": geoData.region,
+            "city": geoData.city,
+            "timezone": geoData.timezone
         });
-    }
+    };
 }]);
 
 app.service('spotifyAPI', ['$http', '$q', function ($http, $q) {
@@ -113,7 +147,7 @@ app.service('spotifyAPI', ['$http', '$q', function ($http, $q) {
             });
 
         return defer.promise;
-    }
+    };
 
     function getTrackSpotifyDataWithLimit(artistName, trackTitle, limit) {
         var defer = $q.defer();
@@ -164,14 +198,14 @@ app.service('spotifyAPI', ['$http', '$q', function ($http, $q) {
         return $http.get(address +
             'search?q=artist%3A%22' + getArtistNameEncoded(artistName) +
             '%22%20track%3A%22' + getTrackTitleEncoded(trackTitle) +
-            '%22&type=track&limit=' + limit)
+            '%22&type=track&limit=' + limit);
     }
 
     var getArtistNameEncoded = function (artistName) {
         return encodeURIComponent(artistName);
-    }
+    };
 
     var getTrackTitleEncoded = function (trackTitle) {
         return encodeURIComponent(trackTitle);
-    }
+    };
 }]);

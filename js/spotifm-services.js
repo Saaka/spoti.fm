@@ -50,6 +50,32 @@ app.service('lastfmAPI', ['$http', '$q', 'spotifyAPI', function ($http, $q, spot
     };
 }]);
 
+app.service('nekudoGeoIp', ['$http', '$q', function ($http, $q) {
+    var address = 'http://geoip.nekudo.com/api';
+
+    this.getGeoInfo = function () {
+        var defer = $q.defer();
+
+        $http.get(address)
+            .then(function (data) {
+                defer.resolve(getMappedObject(data.data));
+            }).catch(function (err) {
+                defer.reject(err);
+            });
+        return defer.promise;
+    };
+
+    var getMappedObject = function (data) {
+        return {
+            "ip": data.ip,
+            "country": data.country.name,
+            "region": '',
+            "city": data.city,
+            "timezone": data.country.time_zone
+        };
+    };
+}]);
+
 app.service('freeGeoIp', ['$http', '$q', function ($http, $q) {
     var address = 'http://freegeoip.net/json/';
 
@@ -95,15 +121,27 @@ app.service('mongger', ['$http', '$q', function ($http, $q) {
     };
 
     var postSpotifm = function (user, period, geoData) {
-        return $http.post(address + '/spotifm', {
-            "user": user,
-            "period": period,
-            "ip": geoData.ip,
-            "country": geoData.country,
-            "region": geoData.region,
-            "city": geoData.city,
-            "timezone": geoData.timezone
-        });
+        if (!geoData) {
+            return $http.post(address + '/spotifm', {
+                "user": user,
+                "period": period,
+                "ip": "",
+                "country": "",
+                "region": "",
+                "city": "",
+                "timezone": ""
+            });
+        } else {
+            return $http.post(address + '/spotifm', {
+                "user": user,
+                "period": period,
+                "ip": geoData.ip,
+                "country": geoData.country,
+                "region": geoData.region,
+                "city": geoData.city,
+                "timezone": geoData.timezone
+            });
+        }
     };
 }]);
 

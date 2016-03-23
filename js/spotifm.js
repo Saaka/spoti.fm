@@ -3,13 +3,13 @@ var app = angular.module('spotifm', ['ngAnimate', 'toaster', 'ngClipboard'])
         ngClipProvider.setPath("utils/ZeroClipboard.swf");
     }]);
 
-app.controller('MainCtrl', ['$scope', 'toaster', '$http', 'lastfmAPI', 'mongger', 'freeGeoIp', function ($scope, toaster, $http, lastfmAPI, mongger, freeGeoIp) {
+app.controller('MainCtrl', ['$scope', 'toaster', '$http', 'lastfmAPI', 'mongger', 'nekudoGeoIp', function ($scope, toaster, $http, lastfmAPI, mongger, nekudoGeoIp) {
     $scope.topTrackList = [];
     $scope.loadingData = true;
     $scope.userName = '';
     $scope.showData = false;
     $scope.geoData = undefined;
-    
+
     $scope.doLoad = function () {
         toaster.clear();
         $scope.topTrackList = [];
@@ -32,16 +32,16 @@ app.controller('MainCtrl', ['$scope', 'toaster', '$http', 'lastfmAPI', 'mongger'
                 $scope.loadingData = false;
             });
     }
-    
-    var loadGeoData = function() {
-        freeGeoIp.getGeoInfo()
-        .then(function(data) {
-            $scope.geoData = data;
-        })
-        .catch(function(error) {
-            console.log(err);
-        });
+
+    var loadGeoData = function () {
+        nekudoGeoIp.getGeoInfo()
+            .then(function (data) {
+                $scope.geoData = data;
+            })
+            .catch(function (error) {
+                console.log(err);
+            });
     };
-    
+
     loadGeoData();
 }]);
